@@ -110,7 +110,7 @@ else()
 
 	set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -D_DEBUG -O0")
 
-	if(MINGW OR MSYS) # MinGW and MSYS always do PIC and complain if we tell them to
+	if(MINGW OR MSYS OR (WIN32 AND CMAKE_C_COMPILER_ID STREQUAL "Clang")) # MinGW, MSYS and clang on Windows always do PIC and complain if we tell them to
 		string(REGEX REPLACE "-fPIC" "" CMAKE_SHARED_LIBRARY_C_FLAGS "${CMAKE_SHARED_LIBRARY_C_FLAGS}")
 	elseif(BUILD_SHARED_LIBS)
 		add_c_flag_IF_SUPPORTED(-fvisibility=hidden)
