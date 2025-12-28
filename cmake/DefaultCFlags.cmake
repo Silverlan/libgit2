@@ -115,7 +115,9 @@ else()
 	elseif(BUILD_SHARED_LIBS)
 		add_c_flag_IF_SUPPORTED(-fvisibility=hidden)
 
-		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+		if (NOT WIN32)
+			set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+		endif()
 	endif()
 
 	if(MINGW)
